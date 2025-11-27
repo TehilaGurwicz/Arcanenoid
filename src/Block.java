@@ -1,5 +1,7 @@
 import biuoop.DrawSurface;
 
+import java.awt.*;
+
 public class Block implements Collidable {
 
     private Rectangle rectangle;
@@ -28,6 +30,7 @@ public class Block implements Collidable {
     }
 
     public void drawOn(DrawSurface drawSurface){
+        //drawSurface.setColor(Color.BLACK);
         drawSurface.fillRectangle((int)this.rectangle.getUpperLeft().getX(),(int)this.rectangle.getUpperLeft().getY(),(int)this.rectangle.getWidth(),(int)this.rectangle.getHeight());
     }
 
