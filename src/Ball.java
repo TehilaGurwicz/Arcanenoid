@@ -51,7 +51,7 @@ public class Ball {
     //gets the direction of the ball according to it's velocity, the *5 is a comfortable way to define the
     //direction, could be any other number.
     public Line getTrajectory(){
-        return new Line(this.center,new Point(5*this.velocity.getDx(),5*this.velocity.getDy()));
+        return new Line(this.center,new Point(this.center.getX() + 5*this.velocity.getDx(),this.center.getY() + 5*this.velocity.getDy()));
     }
 
     //checks where the ball is coming from in order to know where i should stop it before it hits the block
