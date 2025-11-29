@@ -18,7 +18,7 @@ public class Rectangle {
         this.height = height;
 
         this.upperLine = new Line(this.upperLeft, new Point(this.upperLeft.getX() + (int) this.width, this.upperLeft.getY()));
-        this.leftLine = new Line(this.upperLeft, new Point(this.upperLeft.getX(),this.upperLeft.getY() - (int) this.height));
+        this.leftLine = new Line(this.upperLeft, new Point(this.upperLeft.getX(),this.upperLeft.getY() + (int) this.height));
         this.downLine = new Line(new Point(this.upperLeft.getX() , this.upperLeft.getY() + this.height) , new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY() + this.height));
         this.rightLine = new Line(new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY()),new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY() + this.height));
     }

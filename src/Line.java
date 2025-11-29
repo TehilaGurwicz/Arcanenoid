@@ -50,83 +50,6 @@ public class Line {
         return this.start.getY() - this.getSlope() * this.start.getX();
     }
 
-
-    // Returns true if the lines intersect, false otherwise
-    // The methods handles separately with the case that this.slope or other.slope is infinity.
-    // The doubles represent a way to fine an intersection point, to solve an equation.
-    // The last "if" is to confirm that the lines contain the intersection point.
-//    public boolean isIntersecting(Line other) {
-//        if (this.getSlope() != other.getSlope() && !(this.getSlope() == Double.POSITIVE_INFINITY && other.getSlope() == Double.POSITIVE_INFINITY)) {
-//            if (this.getSlope() == Double.POSITIVE_INFINITY)
-//            {
-//                double intersect_x_point = this.start.getX();
-//                double intersect_y_point = other.getSlope() * intersect_x_point + other.yIntersection();
-//                Point intersectPoint = new Point(intersect_x_point,intersect_y_point);
-//
-////                if (intersectPoint.getX() > this.start.getX() && intersectPoint.getX() > other.start.getX() && intersectPoint.getX() < this.end.getX() && intersectPoint.getX() < other.end.getX()) {
-////                    return true;
-////                }
-//                if (intersectPoint.getX() > Math.min(this.start.getX(),this.end.getX()) && intersectPoint.getX() > Math.min(other.start.getX(),other.end.getX()) && intersectPoint.getX() < Math.max(this.start.getX(),this.end.getX()) && intersectPoint.getX() < Math.max(other.start.getX(), other.end.getX()))
-//                {return true;}
-//            }
-//            if (other.getSlope() == Double.POSITIVE_INFINITY)
-//            {
-//                double intersect_x_point = other.start.getX();
-//                double intersect_y_point = this.getSlope() * intersect_x_point + this.yIntersection();
-//                Point intersectPoint = new Point(intersect_x_point,intersect_y_point);
-//
-////                if (intersectPoint.getX() > this.start.getX() && intersectPoint.getX() > other.start.getX() && intersectPoint.getX() < this.end.getX() && intersectPoint.getX() < other.end.getX()) {
-////                    return true;
-////                }
-//                if (intersectPoint.getX() > Math.min(this.start.getX(),this.end.getX()) && intersectPoint.getX() > Math.min(other.start.getX(),other.end.getX()) && intersectPoint.getX() < Math.max(this.start.getX(),this.end.getX()) && intersectPoint.getX() < Math.max(other.start.getX(), other.end.getX()))
-//                {return true;}
-//            }
-//            else
-//            {
-//                double minusSlope = this.getSlope() - other.getSlope();
-//                double minusY_intersect = other.yIntersection() - this.yIntersection();
-//                double intersect_x_point = minusY_intersect / minusSlope;
-//                double intersect_y_point = this.getSlope() * intersect_x_point + this.yIntersection();
-//                Point intersectPoint = new Point(intersect_x_point, intersect_y_point);
-//
-////                if (intersectPoint.getX() > Math.min(this.start.getX() , other.start.getX()) && intersectPoint.getX() < Math.max(this.end.getX() ,other.end.getX())) {
-////                    return true;
-////                }
-//                if (intersectPoint.getX() > Math.min(this.start.getX(),this.end.getX()) && intersectPoint.getX() > Math.min(other.start.getX(),other.end.getX()) && intersectPoint.getX() < Math.max(this.start.getX(),this.end.getX()) && intersectPoint.getX() < Math.max(other.start.getX(), other.end.getX()))
-//                    {return true;}
-//            }
-//        }
-//        return false;
-//    }
-
-
-
-    // Returns the intersection point if the lines intersect,
-    // and null otherwise.
-    // So long and repeating the same calculations from isIntersect method but it is what it is
-//    public Point intersectionWith(Line other) {
-//        if (this.isIntersecting(other)) {
-//            if (this.getSlope() == Double.POSITIVE_INFINITY) {
-//                double intersect_x_point = this.start.getX();
-//                double intersect_y_point = other.getSlope() * intersect_x_point + other.yIntersection();
-//                return new Point(intersect_x_point, intersect_y_point);
-//            }
-//
-//            if (other.getSlope() == Double.POSITIVE_INFINITY) {
-//                double intersect_x_point = other.start.getX();
-//                double intersect_y_point = this.getSlope() * intersect_x_point + this.yIntersection();
-//                return new Point(intersect_x_point, intersect_y_point);
-//            } else {
-//                double minusSlope = this.getSlope() - other.getSlope();
-//                double minusY_intersect = other.yIntersection() - this.yIntersection();
-//                double intersect_x_point = minusY_intersect / minusSlope;
-//                double intersect_y_point = this.getSlope() * intersect_x_point + this.yIntersection();
-//                return new Point(intersect_x_point, intersect_y_point);
-//            }
-//        }
-//        return null;
-//    }
-
     // equals -- return true is the lines are equal, false otherwise
     public boolean equals(Line other) {
         return this.start.equals(other.start) && this.end.equals(other.end);
@@ -153,36 +76,44 @@ public class Line {
 
 
     public Point intersectionWith(Line other){
-        if(this.getSlope() != other.getSlope() && !(this.getSlope() == Double.POSITIVE_INFINITY && other.getSlope() == Double.POSITIVE_INFINITY)){
-            if(this.getSlope() == Double.POSITIVE_INFINITY){
-                if(other.getSlope() == 0) {return new Point(this.start.getX(), other.start.getY());}
-                else{return new Point(this.start.getX(),this.start.getX() * other.getSlope() + other.yIntersection());}
-            }
-            if(other.getSlope() == Double.POSITIVE_INFINITY){
-                if(this.getSlope() == 0){return new Point(other.start.getX(), this.start.getY());}
-                else{return new Point(other.start.getX(),other.start.getX() * this.getSlope() + this.yIntersection());}
-            }
-            if(this.getSlope() == 0){return new Point((this.start.getY() - other.yIntersection())/other.getSlope(),this.start.getY());}
-            if(other.getSlope() == 0){return new Point((other.start.getY() - this.yIntersection())/this.getSlope(), other.start.getY());}
+
+        //both are Vertical
+        if(Double.isInfinite(this.getSlope())&&Double.isInfinite(other.getSlope())){
+            return null;
+        }
+        //this is vertical
+        else if(Double.isInfinite(this.getSlope())){
+            return new Point(this.start.getX(),this.start.getX()*other.getSlope()+ other.yIntersection());
+
+        }//other is vertical
+        else if(Double.isInfinite(other.getSlope())){
+            return new Point(other.start.getX(),other.start.getX()*this.getSlope()+ this.yIntersection());
+        }
+        //both "regular" lines
+        else{
             double minusSlope = this.getSlope() - other.getSlope();
             double minusY_intersect = other.yIntersection() - this.yIntersection();
             double intersect_x_point = minusY_intersect / minusSlope;
             double intersect_y_point = this.getSlope() * intersect_x_point + this.yIntersection();
             return new Point(intersect_x_point, intersect_y_point);
         }
-        return null;
     }
-
-
-    public boolean isIntersecting(Line other){
-        if(this.intersectionWith(other) != null){
-            if (this.intersectionWith(other).getX() > Math.min(this.start.getX(),this.end.getX()) && this.intersectionWith(other).getX() > Math.min(other.start.getX(),other.end.getX()) && this.intersectionWith(other).getX() < Math.max(this.start.getX(),this.end.getX()) && this.intersectionWith(other).getX() < Math.max(other.start.getX(), other.end.getX()))
-            {return true;}
+    public boolean isIntersecting(Line other) {
+        Point p = this.intersectionWith(other);
+        if (p == null) {
+            return false;
         }
-        return false;
+        return this.isPointOnLine(p) && other.isPointOnLine(p);
     }
+    private boolean isPointOnLine(Point p) {
+        double minX = Math.min(this.start.getX(), this.end.getX());
+        double maxX = Math.max(this.start.getX(), this.end.getX());
+        double minY = Math.min(this.start.getY(), this.end.getY());
+        double maxY = Math.max(this.start.getY(), this.end.getY());
+        return p.getX() >= minX - 0.0001 && p.getX() <= maxX + 0.0001 && p.getY() >= minY-0.0001 && p.getY() <= maxY + 0.0001;
+    }
+
 
 
 
 }
-
