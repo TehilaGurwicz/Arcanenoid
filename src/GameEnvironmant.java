@@ -6,15 +6,12 @@ public class GameEnvironmant {
     private List<Collidable> collidables;
 
     // constructor
-    public GameEnvironmant(){
-        this.collidables = new ArrayList<Collidable>();
-    }
+    public GameEnvironmant(){this.collidables = new ArrayList<Collidable>();}
 
 
     // add the given collidable to the environment.
-    public void addCollidable(Collidable c){
-        this.collidables.add(c);
-    }
+    public void addCollidable(Collidable c) {this.collidables.add(c);}
+    public void removeCollidable(Collidable c) {this.collidables.remove(c);}
 
 
 

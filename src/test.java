@@ -1,9 +1,9 @@
-import biuoop.DrawSurface;
 import biuoop.GUI;
+import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
-import org.ietf.jgss.GSSContext;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class test {
     public static void main(String[] args){
@@ -83,14 +83,29 @@ public class test {
 //                Block block = new Block(rect);
 //                block.addToGame(game); // מוסיף גם ל-sprites וגם ל-collidables
 //            }
-//        }
+ //        }
 //
 //        // הרץ את הלולאת אנימציה
 //        game.run();
 
 //        GUI gui = new GUI("game",
-        Game game = new Game();
-        game.initialize();
-            game.run();
+        int framePerSecond = 60;
+        GUI gui = new GUI("game", 800, 600);
+        Sleeper sleeper = new Sleeper();
+        AnimationRunner runner = new AnimationRunner(framePerSecond,sleeper,gui);
+        KeyboardSensor keyboardSensor = runner.getGui().getKeyboardSensor();
+        LevelInformation levelInformation1 = new Level1();
+        LevelInformation levelInformation2 = new Level2();
+        LevelInformation levelInformation3 = new Level3();
+        LevelInformation levelInformation4 = new Level4();
+        List<LevelInformation> levels = new ArrayList<>();
+        levels.add(levelInformation1);
+        levels.add(levelInformation2);
+        levels.add(levelInformation3);
+        levels.add(levelInformation4);
+
+        GameFlow gameFlow = new GameFlow(runner, keyboardSensor);
+        gameFlow.runLevels(levels);
+        gui.close();
    }
 }

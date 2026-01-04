@@ -1,7 +1,5 @@
 import java.lang.Math;
 import biuoop.DrawSurface;
-import biuoop.GUI;
-import java.awt.Color;
 
 
 public class Ball implements Sprite {
@@ -32,6 +30,7 @@ public class Ball implements Sprite {
     public java.awt.Color getColor() {return this.color;}
 
     // draw the ball on the given DrawSurface
+    @Override
     public void drawOn(DrawSurface surface){
         surface.setColor(this.color);
         surface.fillCircle((int) this.center.getX(), (int) this.center.getY(),(int) r);
@@ -63,15 +62,19 @@ public class Ball implements Sprite {
           if (collisionInfo != null){
               //if (collisionInfo.collisionPoint() != null){
               this.center = new Point(collisionInfo.collisionPoint().getX() -0.01*this.velocity.getDx(),collisionInfo.collisionPoint().getY() -0.01*this.velocity.getDy());
-              this.setVelocity(collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(),this.velocity));
+              this.setVelocity(collisionInfo.collisionObject().hit(this,collisionInfo.collisionPoint(),this.velocity));
           }
           else{this.center = this.velocity.applyToPoint(this.center);}
     }
     @Override
     public void timePassed() {this.moveOneStep();}
 
-    public void addToGame(Game g){
+    public void addToGame(GameLevel g){
         g.getSprites().addSprite(this);
+    }
+
+    public void removeFromGame(GameLevel g){
+        g.getSprites().removeSprite(this);
     }
 
 }

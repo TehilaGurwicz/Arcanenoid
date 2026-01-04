@@ -7,7 +7,7 @@ public class Paddle implements Sprite, Collidable {
     private biuoop.KeyboardSensor keyboard;
     private GUI gui;
     private Rectangle rectangle;
-    private int speed = 10;
+    private int speed = DinamicNumbers.PADDLE_SPEED;
 
     //constructor
     public Paddle(Rectangle rectangle,biuoop.KeyboardSensor keyboard){
@@ -47,7 +47,7 @@ public class Paddle implements Sprite, Collidable {
     public Rectangle getCollisionRectangle() {return this.rectangle;}
 
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity){
+    public Velocity hit(Ball hitter,Point collisionPoint, Velocity currentVelocity){
 
         //holds the X value that each of the 5 paddle parts starts in.
         double[] paddleParts = new double[5];
@@ -74,7 +74,7 @@ public class Paddle implements Sprite, Collidable {
 
 
     // Add this paddle to the game.
-    public void addToGame(Game g){
+    public void addToGame(GameLevel g){
         g.getSprites().addSprite(this);
         g.getEnvironment().addCollidable(this);
     }

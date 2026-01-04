@@ -15,16 +15,24 @@ public class SpriteCollection {
         this.sprites.add(s);
     }
 
+    public void removeSprite(Sprite s){
+        this.sprites.remove(s);
+    }
+
     // call timePassed() on all sprites.
     public void notifyAllTimePassed(){
-        for(Sprite sprite : this.sprites){
+        List<Sprite> spritesCopy = new ArrayList<>(this.sprites);
+        for(Sprite sprite : spritesCopy){
             sprite.timePassed();
         }
     }
 
     // call drawOn(d) on all sprites.
+    //copied the this.sprites to a new arrayList so it won't make trouble went the blockRemover
+    //erases one of the sprites.
     public void drawAllOn(DrawSurface d){
-        for(Sprite sprite : this.sprites){
+        List<Sprite> spritesCopy = new ArrayList<>(this.sprites);
+        for(Sprite sprite : spritesCopy){
             sprite.drawOn(d);
         }
     }
