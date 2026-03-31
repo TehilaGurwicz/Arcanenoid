@@ -24,6 +24,15 @@ This project showcases strong software engineering principles, including design 
 
 ## 🚀 How to Run
 
-1. Clone this repository to your local machine:
-   ```bash
-   git clone [https://github.com/](https://github.com/)[Your-GitHub-Username]/[Your-Repository-Name].git
+1. Clone this repository to your local machine.
+2. Open the project in your preferred IDE (e.g., IntelliJ IDEA, Eclipse).
+3. Ensure the `biuoop.jar` library (located in the `libs` directory) is added to your project's classpath / dependencies.
+4. Locate the `Main` class and run it to start the game.
+
+## 🎮 Controls
+
+* **Left Arrow:** Move Paddle Left
+* **Right Arrow:** Move Paddle Right
+* **'P' Key:** Pause Game
+* **Spacebar:** Continue (from Pause or End screens)
+  
