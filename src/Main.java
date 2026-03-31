@@ -1,26 +1,29 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import biuoop.GUI;
+import biuoop.KeyboardSensor;
+import biuoop.Sleeper;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
+        int framesPerSecond = 60;
+        GUI gui = new GUI("Arkanoid Game", 800, 600);
+        Sleeper sleeper = new Sleeper();
+        AnimationRunner runner = new AnimationRunner(framesPerSecond, sleeper, gui);
+        KeyboardSensor keyboardSensor = runner.getGui().getKeyboardSensor();
 
-        Point start1 = new Point(1, 1);
-        Point end1 = new Point(5, 5);
-        Line line1 = new Line(start1, end1);
+        // Initialize levels
+        List<LevelInformation> levels = new ArrayList<>();
+        levels.add(new Level1());
+        levels.add(new Level2());
+        levels.add(new Level3());
+        levels.add(new Level4());
 
-        Point start2 = new Point(1,2);
-        Point end2 = new Point(7,2);
-        Line line2 = new Line(start2,end2);
+        // Run the game
+        GameFlow gameFlow = new GameFlow(runner, keyboardSensor);
+        gameFlow.runLevels(levels);
 
-        //if (line1.isIntersecting(line2)) {
-            //System.out.println(true);
-            System.out.println(line1.intersectionWith(line2));
-       // }
-
-
-
-
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-
+        gui.close();
     }
 }
+
